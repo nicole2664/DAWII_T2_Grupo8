@@ -1,0 +1,157 @@
+{
+  "info": {
+    "_postman_id": "pagoya-fintech-exam-collection",
+    "name": "PAGOYA Perú - Examen DAWII",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01. ms-reclamos",
+      "item": [
+        {
+          "name": "1. Registrar Reclamo (POST)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nomcliente\": \"BRAYAN JAVIER JARA ROJAS\",\n  \"ultimos4tarjeta\": \"4321\",\n  \"motivo\": \"Consumo no reconocido en tarjeta prepago\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/reclamos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "reclamos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Consultar Reclamo por Número (GET)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/reclamos/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "reclamos",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Actualizar Reclamo (PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": 2,\n  \"nomAnalista\": \"CESAR ROMAN QUISPE\",\n  \"observacion\": \"Reclamo procedente. Se realiza el reembolso.\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/reclamos/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "reclamos",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02. ms-resolucion",
+      "item": [
+        {
+          "name": "1. Procesar Resolución - Éxito (POST)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numreclamo\": 1,\n  \"estado\": 2,\n  \"nomAnalista\": \"YULY GISELA HUANCA TITO\",\n  \"observacion\": \"Procedente: Transacción revertida a la tarjeta prepago\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8085/api/resoluciones",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "api",
+                "resoluciones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Procesar Resolución - Error / No Existe (POST)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numreclamo\": 9999,\n  \"estado\": 2,\n  \"nomAnalista\": \"YAXON PAUL CALLE CASTILLO\",\n  \"observacion\": \"Prueba de error\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8085/api/resoluciones",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "api",
+                "resoluciones"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
