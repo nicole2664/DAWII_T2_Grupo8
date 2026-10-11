@@ -3,18 +3,31 @@
 **Curso:** PROG04697 - Desarrollo de Aplicaciones Web II | **Ciclo:** Sexto
 
 ## Integrantes
-
-- Nicole Eimi Nolasco Zaan
+- Yaxon Paul Calle Castillo
 - Yuly Gisela Huanca Tito
 - Brayan Javier Jara Rojas
-- Yaxon Paul Calle Castillo
+- Nicole Eimi Nolasco Zaan
 - Cesar Roman Quispe
 
+---
+
 ## Descripción del Proyecto (PAGOYA Perú)
-Solución backend desarrollada bajo una arquitectura de microservicios para la gestión de tarjetas prepago, la cual incluye:
-- **Eureka Server:** Servidor de descubrimiento y registro (Puerto 8761).
-- **Microservicio de Reclamos (`ms-reclamos`):** Gestión, registro y consulta de reclamos de clientes (Puerto 8081).
-- **Microservicio de Resolución (`ms-resolucion`):** Automatización de dictámenes y validaciones conectadas mediante Spring Cloud OpenFeign (Puerto 8085).
+Solución backend basada en una arquitectura de microservicios para la gestión de tarjetas prepago, estructurada de la siguiente manera:
+
+### 1. Eureka Server (`eureka-server` - Puerto 8761)
+- Servidor central de descubrimiento, registro y monitoreo de los microservicios.
+
+### 2. Microservicio de Reclamos (`ms-reclamos` - Puerto 8081)
+- Gestión de reclamos por consumos desconocidos en tarjetas prepago.
+- **Campos principales:** `numreclamo`, `fechareclamo`, `nomcliente`, `ultimos4tarjeta`, `motivo`, `analista` (por defecto "No asignado"), `estado` (por defecto 1 - pendiente) y `observacion` (por defecto "por evaluar").
+- **Funcionalidades:** Registro, consulta por número y actualización de reclamos.
+
+### 3. Microservicio de Resolución (`ms-resolucion` - Puerto 8085)
+- Automatización del proceso de resolución a cargo del área de riesgos.
+- **Comunicación:** Integración con `ms-reclamos` mediante **Spring Cloud OpenFeign** para validar la existencia del reclamo.
+- **Acciones:** Actualiza el estado a 2 (procedente) o 3 (improcedente), registra el nombre del analista y modifica la observación, retornando los mensajes de éxito o error correspondientes.
+
+---
 
 ## Tecnologías Utilizadas
 - **Java & Spring Boot 3.3.4**
